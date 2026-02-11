@@ -5,8 +5,7 @@ Build your own self-hosted VPN gateway with a secure and privacy enhanced exit.
 All your devices securely connect to your private WireGuard server, where
 traffic is managed, and monitored under your control. From there, Gluetun
 forwards it through your trusted VPN provider, giving you a single encrypted
-exit IP, enhanced privacy, and location masking — all without depending on
-third-party infrastructure.
+exit IP, enhanced privacy, and location masking.
 
 - **Easy WireGuard Management**: Simple web interface for managing WireGuard VPN
   (WG-Easy)
@@ -18,55 +17,55 @@ third-party infrastructure.
 - **DNS Filtering**: Integrated Adguard Home for ad-blocking and tracking
   protection
 
-> **📖 Want to learn more?** Check out this [detailed introduction
+> **Want to learn more?** Check out this [detailed introduction
 > article](https://blog.bktus.com/en/archives/2918/) explaining the principles
 > and architecture of this VPN chaining setup.
 
-## 📑 Table of Contents
+## Table of Contents
 
 - [WireGuard Easy \& Gluetun](#wireguard-easy--gluetun)
-  - [📑 Table of Contents](#-table-of-contents)
-  - [📋 Prerequisites](#-prerequisites)
-  - [🏗️ Architecture](#️-architecture)
-  - [🔄 About This Project](#-about-this-project)
+  - [Table of Contents](#table-of-contents)
+  - [Prerequisites](#prerequisites)
+  - [Architecture](#architecture)
+  - [About This Project](#about-this-project)
     - [Synchronization with wg-easy](#synchronization-with-wg-easy)
-  - [🚀 Quick Start](#-quick-start)
+  - [Quick Start](#quick-start)
     - [1. Clone the Repository](#1-clone-the-repository)
     - [2. Configure Environment Variables and AdGuard Home](#2-configure-environment-variables-and-adguard-home)
-    - [4. Start Services](#4-start-services)
-    - [5. Access Web Interface](#5-access-web-interface)
-  - [⚙️ Configuration](#️-configuration)
+    - [3. Start Services](#3-start-services)
+    - [4. Access Web Interface](#4-access-web-interface)
+  - [Configuration](#configuration)
     - [Adding Clients](#adding-clients)
     - [Port Forwarding](#port-forwarding)
     - [AdguardHome Web Interface](#adguardhome-web-interface)
     - [Advanced Network Configuration](#advanced-network-configuration)
       - [Hooks for WG-Easy](#hooks-for-wg-easy)
       - [iptables Rules for Gluetun](#iptables-rules-for-gluetun)
-  - [🔧 Management](#-management)
+  - [Management](#management)
     - [View Logs](#view-logs)
     - [Stop Services](#stop-services)
     - [Restart Services](#restart-services)
     - [Update Services](#update-services)
     - [Complete Cleanup](#complete-cleanup)
-  - [🛠️ Troubleshooting](#️-troubleshooting)
+  - [Troubleshooting](#troubleshooting)
     - [Connection Issues](#connection-issues)
     - [Logs](#logs)
-  - [📚 Additional Resources](#-additional-resources)
-  - [🤝 Contributing](#-contributing)
+  - [Additional Resources](#additional-resources)
+  - [Contributing](#contributing)
     - [Ways to Contribute](#ways-to-contribute)
-  - [⚠️ Disclaimer](#️-disclaimer)
+  - [Disclaimer](#disclaimer)
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Docker Engine 20.10 or later
 - Docker Compose V2 or later
 - A VPN provider account (for Gluetun)
 - Root/sudo access on the host machine
 
-✅ Tested on: Raspberry Pi 5 / Linux Kernel v6.18.10 / Docker v29.2.1 / Docker Compose
-v5.0.2
+Tested on: Raspberry Pi 5 / Linux Kernel v6.18.10 / Docker v29.2.1 / Docker
+Compose v5.0.2
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 flowchart TD
@@ -97,7 +96,7 @@ flowchart TD
 3. Gluetun routes traffic through VPN provider (encrypted again)
 4. Traffic reaches the internet with VPN provider's IP address
 
-## 🔄 About This Project
+## About This Project
 
 This project is based on [wg-easy](https://github.com/wg-easy/wg-easy) with the
 following modifications:
@@ -119,7 +118,7 @@ This project maintains compatibility with wg-easy by:
 - Testing all updates for compatibility with Gluetun integration
 - Contributing usability improvements and bug fixes back to the upstream project
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the Repository
 
@@ -144,7 +143,7 @@ cp .env.example .env
 > using dedicated DNS resolver for preventing DNS leaks which may compromise
 > your privacy.
 
-### 4. Start Services
+### 3. Start Services
 
 Check docker compose file for any additional configuration you may need to do,
 then start the services:
@@ -153,7 +152,7 @@ then start the services:
 sudo docker compose up -d
 ```
 
-### 5. Access Web Interface
+### 4. Access Web Interface
 
 Open your browser and navigate to:
 
@@ -161,7 +160,7 @@ Open your browser and navigate to:
 http://YOUR_SERVER_IP:51821
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Adding Clients
 
@@ -201,7 +200,7 @@ changes made in `wg-post-up.txt`.
 
 Gluetun's firewall and routing behavior by modifying the `iptables/` directory.
 
-## 🔧 Management
+## Management
 
 ### View Logs
 
@@ -237,11 +236,11 @@ docker compose down --rmi all -v
 rm -rf ./data
 ```
 
-**⚠️ Warning**: This will delete all data including WireGuard configurations and
+**Warning**: This will delete all data including WireGuard configurations and
 client settings. Make sure to backup any important configurations before running
 this command.
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Connection Issues
 
@@ -265,14 +264,14 @@ Check WireGuard Easy logs:
 docker compose logs wg-easy
 ```
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [WireGuard Official Documentation](https://www.wireguard.com/)
 - [Gluetun Wiki](https://github.com/qdm12/gluetun-wiki)
 - [WG-Easy](https://wg-easy.github.io/wg-easy/v15.1/)
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -284,7 +283,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - **Upstream Contributions**: Usability improvements may be contributed to
   wg-easy project.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This tool is for educational and personal use only. Please ensure compliance
 with your VPN provider's terms of service and local regulations.

@@ -32,8 +32,7 @@ third-party infrastructure.
     - [Synchronization with wg-easy](#synchronization-with-wg-easy)
   - [🚀 Quick Start](#-quick-start)
     - [1. Clone the Repository](#1-clone-the-repository)
-    - [2. Configure Environment Variables](#2-configure-environment-variables)
-    - [3. Configure AdguardHome (DNS Resolver)](#3-configure-adguardhome-dns-resolver)
+    - [2. Configure Environment Variables and AdGuard Home](#2-configure-environment-variables-and-adguard-home)
     - [4. Start Services](#4-start-services)
     - [5. Access Web Interface](#5-access-web-interface)
   - [⚙️ Configuration](#️-configuration)
@@ -57,16 +56,15 @@ third-party infrastructure.
     - [Ways to Contribute](#ways-to-contribute)
   - [⚠️ Disclaimer](#️-disclaimer)
 
-
 ## 📋 Prerequisites
 
 - Docker Engine 20.10 or later
-- Docker Compose V2
+- Docker Compose V2 or later
 - A VPN provider account (for Gluetun)
 - Root/sudo access on the host machine
 
-✅ Tested on: Raspberry Pi 5 / Kernel v6.16.0 / Docker v28.0.4 / Docker Compose
-v2.34.0
+✅ Tested on: Raspberry Pi 5 / Linux Kernel v6.18.10 / Docker v29.2.1 / Docker Compose
+v5.0.2
 
 ## 🏗️ Architecture
 
@@ -93,6 +91,7 @@ flowchart TD
 ```
 
 **Traffic Flow:**
+
 1. Your device connects to wg-easy via WireGuard (encrypted)
 2. wg-easy forwards traffic to Gluetun container
 3. Gluetun routes traffic through VPN provider (encrypted again)
@@ -115,6 +114,7 @@ following modifications:
 ### Synchronization with wg-easy
 
 This project maintains compatibility with wg-easy by:
+
 - Regularly syncing with the latest wg-easy releases
 - Testing all updates for compatibility with Gluetun integration
 - Contributing usability improvements and bug fixes back to the upstream project
@@ -128,25 +128,21 @@ git clone https://github.com/saturneric/wg-easy-gluetun.git
 cd wg-easy-gluetun
 ```
 
-### 2. Configure Environment Variables
+### 2. Configure Environment Variables and AdGuard Home
 
 ```shell
 cp .env.example .env
 ```
 
-Edit `.env` file with your settings.
+- Edit `.env` file with your settings.
+- Edit `AdGuardHome.yaml` under `conf/adguardhome` with your settings,
+  especially the DNS settings if you want to use the DNS server provided by your
+  VPN provider. You may later configure it via web interface as well. (Optional)
 
-### 3. Configure AdguardHome (DNS Resolver)
-
-```shell
-mkdir -p ./data/adguardhome/conf
-cp ./conf/AdGuardHome.example.yaml ./data/adguardhome/conf/AdGuardHome.yaml
-```
-
-Edit `AdGuardHome.yaml` file with your settings
-
-> Tips: If you do not want to use Adguard Home, you can skip this step and
-modify the `.env` and `docker-compose.yml` file to remove the relevant lines.
+> Tips: If you do not want to use Adguard Home, you can edit the `.env` and
+> `docker-compose.yml` file to remove the relevant lines. But I highly recommend
+> using dedicated DNS resolver for preventing DNS leaks which may compromise
+> your privacy.
 
 ### 4. Start Services
 
@@ -160,6 +156,7 @@ sudo docker compose up -d
 ### 5. Access Web Interface
 
 Open your browser and navigate to:
+
 ```
 http://YOUR_SERVER_IP:51821
 ```
@@ -176,6 +173,7 @@ http://YOUR_SERVER_IP:51821
 ### Port Forwarding
 
 Make sure to forward the following ports on your router:
+
 - `51820/udp` - WireGuard VPN
 - `51821/tcp` - Web UI (optional, for remote management)
 
@@ -183,6 +181,7 @@ Make sure to forward the following ports on your router:
 
 Access AdguardHome web interface (client must be connected with wireguard
 tunnel) at:
+
 ```
 http://172.31.0.4
 ```
@@ -247,6 +246,7 @@ this command.
 ### Connection Issues
 
 Check if containers are running:
+
 ```shell
 docker compose ps
 ```
@@ -254,11 +254,13 @@ docker compose ps
 ### Logs
 
 Verify Gluetun logs:
+
 ```shell
 docker compose logs gluetun
 ```
 
 Check WireGuard Easy logs:
+
 ```shell
 docker compose logs wg-easy
 ```
@@ -286,4 +288,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This tool is for educational and personal use only. Please ensure compliance
 with your VPN provider's terms of service and local regulations.
-

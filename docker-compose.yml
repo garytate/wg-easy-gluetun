@@ -64,7 +64,7 @@ services:
         restart: true
     volumes:
       - ./data/adguardhome/work:/opt/adguardhome/work
-      - ./data/adguardhome/conf:/opt/adguardhome/conf
+      - ./conf/adguardhome:/opt/adguardhome/conf
     restart: unless-stopped
 
 networks:

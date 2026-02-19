@@ -18,7 +18,7 @@ exit IP, enhanced privacy, and location masking.
   protection
 
 > **Want to learn more?** Check out this [detailed introduction
-> article](https://blog.bktus.com/en/archives/2918/) explaining the principles
+> article](https://blog.bktus.com/en/archives/qqyy2t/) explaining the principles
 > and architecture of this VPN chaining setup.
 
 ## Table of Contents

@@ -171,7 +171,7 @@ http://YOUR_SERVER_IP:51821
 
 ### Port Forwarding
 
-Make sure to forward the following ports on your router:
+Make sure to forward the following ports on your VPS:
 
 - `51820/udp` - WireGuard VPN
 - `51821/tcp` - Web UI (optional, for remote management)
@@ -190,7 +190,7 @@ http://172.31.0.4
 #### Hooks for WG-Easy
 
 You can customize WG-Easy's network behavior by modifying scripts in the
-`hooks/` directory. The hooks are automatically built into the wg-easy container
+`conf/hooks/` directory. The hooks are automatically built into the wg-easy container
 and executed at the appropriate times.
 
 Don't forget to set corresponding commands in `wg-post-down.txt` to clean up any
@@ -198,7 +198,7 @@ changes made in `wg-post-up.txt`.
 
 #### iptables Rules for Gluetun
 
-Gluetun's firewall and routing behavior by modifying the `iptables/` directory.
+Gluetun's firewall and routing behavior by modifying the `conf/iptables/` directory.
 
 ## Management
 
